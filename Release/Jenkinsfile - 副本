@@ -2,26 +2,6 @@ pipeline {
     agent any
     
     stages {
-
-        stage('Input Parameters') {
-            steps {
-                script {
-                    def userInput = input(
-                        id: 'UserInput',
-                        message: '版本号',
-                        parameters: [
-                            string(
-                                name: 'SCRIPT_ARGS',
-                                description: '命令行脚本需要的参数',
-                                defaultValue: ''
-                            )
-                        ]
-                    )
-                    env.SCRIPT_ARGS = userInput
-                }
-            }
-        }
-
         stage('拉取代码') {
             steps {
                 // 多分支流水线会自动拉取代码，这里主要是确认
@@ -50,11 +30,12 @@ pipeline {
         
         stage('执行upgrade.sh') {
             steps {
-                sh ''"
-                    cd LinuxUpgrade
-                    chmod +x MowerUpGradeConsole
-                    ./MowerUpGradeConsole ${env.SCRIPT_ARGS}
-                "''
+                script {
+                    sh script: '''
+                        chmod +x upgrade.sh
+                        ./upgrade.sh
+                    ''', returnStdout: false
+                }
             }
         }
     }
