@@ -50,11 +50,11 @@ pipeline {
         
         stage('执行upgrade.sh') {
             steps {
-                sh ''"
+                sh """
                     cd LinuxUpgrade
                     chmod +x MowerUpGradeConsole
                     ./MowerUpGradeConsole ${env.SCRIPT_ARGS}
-                "''
+                """
             }
         }
     }
