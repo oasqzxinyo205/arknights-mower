@@ -23,8 +23,10 @@ pipeline {
             }
             steps {
                 echo "拉取当前分支代码"
-                scm.extensions += [[$class: 'CloneOption', depth: 1, noTags: false, shallow: true]]
-                checkout scm
+                script{
+                    scm.extensions += [[$class: 'CloneOption', depth: 1, noTags: false, shallow: true]]
+                    checkout scm
+                }
             }
         }
 
