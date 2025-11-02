@@ -15,12 +15,12 @@ pipeline {
     }
 
     stages {
-        when {
-            not { 
-                equals expected: '', actual: params.DEPLOY_ENV
-            }
-        }
         stage('Checkout') {
+            when {
+                not { 
+                    equals expected: '', actual: params.DEPLOY_ENV
+                }
+            }
             steps {
                 echo "拉取当前分支代码"
                 checkout scm
