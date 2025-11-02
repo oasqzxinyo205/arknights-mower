@@ -3,7 +3,7 @@ pipeline {
     options {
         skipDefaultCheckout(true)
     }
-    
+
     agent any
     
     parameters {
@@ -20,6 +20,7 @@ pipeline {
             steps {
                 // 多分支流水线会自动拉取代码，这里主要是确认
                 echo "当前分支: ${env.BRANCH_NAME}"
+                echo "当前部署环境: ${params.DEPLOY_ENV}"
                 sh 'ls -la'  // 验证文件是否存在
             }
         }
@@ -27,7 +28,7 @@ pipeline {
         stage('Build') {
             when {
                 not { 
-                    equals expected: '', actual: env.BRANCH_NAME 
+                    equals expected: '', actual: params.DEPLOY_ENV
                 }
             }
             steps {
