@@ -15,7 +15,11 @@ pipeline {
     }
 
     stages {
-
+        when {
+            not { 
+                equals expected: '', actual: params.DEPLOY_ENV
+            }
+        }
         stage('Checkout') {
             steps {
                 echo "拉取当前分支代码"
