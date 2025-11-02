@@ -46,7 +46,7 @@ pipeline {
         stage('执行upgrade.sh') {
             when {
                 not { 
-                    equals expected: '', actual: params.DEPLOY_ENV
+                    equals expected: '1', actual: params.DEPLOY_ENV
                 }
             }
             steps {
