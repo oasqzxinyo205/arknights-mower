@@ -1,9 +1,4 @@
 pipeline {
-    
-    options {
-        skipDefaultCheckout(true)
-    }
-
     agent any
     
     parameters {
@@ -15,17 +10,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            when {
-                not { 
-                    equals expected: '', actual: params.DEPLOY_ENV
-                }
-            }
-            steps {
-                echo "拉取当前分支代码"
-                checkout scm
-            }
-        }
 
         stage('检查拉取') {
             steps {
