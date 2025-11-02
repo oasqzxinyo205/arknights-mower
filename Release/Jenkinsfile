@@ -23,7 +23,9 @@ pipeline {
             }
             steps {
                 echo "拉取当前分支代码"
-                checkout scm
+                sh """
+                    git fetch origin ${env.BRANCH_NAME} --depth=1 && git checkout -B ${env.BRANCH_NAME} FETCH_HEAD
+                """
             }
         }
 
